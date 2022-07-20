@@ -13,7 +13,13 @@ class RestaurantTest {
     //-------FOR THE 2 TESTS BELOW, YOU MAY USE THE CONCEPT OF MOCKING, IF YOU RUN INTO ANY TROUBLE
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
-        //WRITE UNIT TEST CASE HERE
+        // Provided Opening time & Closed time without using Mock so Refactoring of Code is not possible.
+        LocalTime openingTime = LocalTime.now().minusHours(6);
+        LocalTime closingTime = LocalTime.now().plusHours(3);
+        restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        assertTrue(restaurant.isRestaurantOpen());
     }
 
     @Test

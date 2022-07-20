@@ -18,14 +18,19 @@ public class Restaurant {
     }
 
     public boolean isRestaurantOpen() {
-        return true;
-        //DELETE ABOVE STATEMENT AND WRITE CODE HERE
-    }
+            LocalTime currentTime = getCurrentTime();
+            if(openingTime.isAfter(closingTime)){
+                return !(openingTime.compareTo(currentTime) <= 0 && currentTime.compareTo(closingTime) < 0);
+            }
+            return openingTime.compareTo(currentTime) <= 0 && currentTime.compareTo(closingTime) < 0;
+            //DELETE ABOVE STATEMENT AND WRITE CODE HERE
+
+        }
 
     public LocalTime getCurrentTime(){ return  LocalTime.now(); }
 
     public List<Item> getMenu() {
-        return null;
+        return menu;
         //DELETE ABOVE RETURN STATEMENT AND WRITE CODE HERE
     }
 
