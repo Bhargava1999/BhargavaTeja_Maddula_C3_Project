@@ -36,6 +36,33 @@ class RestaurantTest {
 
     //<<<<<<<<<<<<<<<<<<<<<<<<<OPEN/CLOSED>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    //<<<<<<<<<<<<<<<<<<<<<<<<<TDD Price To Be Paid>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void adding_items_to_menu_getting_price_for_the_ordered_two_items() {
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant = new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
+        restaurant.addToMenu("Sweet corn soup", 119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Vegetable Biryani", 180);
+        restaurant.addToMenu("Fried Rice", 150);
+        restaurant.addToMenu("Pizza", 350);
+        List<String> SelectedOrders = new ArrayList<String>();
+        SelectedOrders.add("Vegetable lasagne");
+        SelectedOrders.add("Fried Rice");
+        assertEquals(419, restaurant.orderedBillPayment(SelectedOrders));
+    }
+    @Test
+    public void adding_items_to_menu_getting_price_for_the_ordered_zero_items() {
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        restaurant = new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
+        restaurant.addToMenu("Sweet corn soup", 119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        List<String> SelectedOrders= new ArrayList<String>();
+        assertEquals( 0, restaurant.orderedBillPayment(SelectedOrders));
+    }
+    //<<<<<<<<<<<<<<<<<<<<<<<<<TDD Price To Be Paid>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>>>MENU<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test

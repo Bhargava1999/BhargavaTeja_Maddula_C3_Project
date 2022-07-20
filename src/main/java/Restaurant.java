@@ -1,3 +1,4 @@
+import java.awt.desktop.ScreenSleepEvent;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,16 +17,15 @@ public class Restaurant {
         this.openingTime = openingTime;
         this.closingTime = closingTime;
     }
-
     public boolean isRestaurantOpen() {
-            LocalTime currentTime = getCurrentTime();
-            if(openingTime.isAfter(closingTime)){
-                return !(openingTime.compareTo(currentTime) <= 0 && currentTime.compareTo(closingTime) < 0);
-            }
-            return openingTime.compareTo(currentTime) <= 0 && currentTime.compareTo(closingTime) < 0;
-            //DELETE ABOVE STATEMENT AND WRITE CODE HERE
-
+        LocalTime currentTime = getCurrentTime();
+        if(openingTime.isAfter(closingTime)){
+            return !(openingTime.compareTo(currentTime) <= 0 && currentTime.compareTo(closingTime) < 0);
         }
+        return openingTime.compareTo(currentTime) <= 0 && currentTime.compareTo(closingTime) < 0;
+        //DELETE ABOVE STATEMENT AND WRITE CODE HERE
+
+    }
 
     public LocalTime getCurrentTime(){ return  LocalTime.now(); }
 
@@ -42,11 +42,24 @@ public class Restaurant {
         return null;
     }
 
+    public int orderedBillPayment(List<String> itemNames){
+        int totalpayment = 0;
+        for(String itemName: itemNames) {
+            Item item = findItemByName(itemName);
+            if (item == null) {
+                continue;
+            } else {
+                totalpayment += item.getPrice();
+            }
+        }
+        return totalpayment;
+    }
+
     public void addToMenu(String name, int price) {
         Item newItem = new Item(name,price);
         menu.add(newItem);
     }
-    
+
     public void removeFromMenu(String itemName) throws itemNotFoundException {
 
         Item itemToBeRemoved = findItemByName(itemName);
